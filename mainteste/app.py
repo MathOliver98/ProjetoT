@@ -25,9 +25,9 @@ def gravar():
   quantidade = request.form['quantidade']
   validade = request.form['validade']
   categoria = request.form['categoria']
-  prod_ID = request.form['prod_ID']
-  inputDados = (marca, nome, preco, quantidade, validade, categoria, prod_ID)
-  if marca and nome and preco and quantidade and validade and categoria and prod_ID:
+  ProdID  = request.form['ProdID ']
+  inputDados = (marca, nome, preco, quantidade, validade, categoria, ProdID )
+  if marca and nome and preco and quantidade and validade and categoria and ProdID :
     conn = mysql.connect()
     cursor = conn.cursor()
     cursor.execute(sqlQuery, inputDados)
