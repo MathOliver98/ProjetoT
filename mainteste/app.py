@@ -14,7 +14,7 @@ mysql.init_app(app)
 
 @app.route('/')
 def main():
-    return render_template('index.html')
+    return render_template('cadastrar.html')
 
 @app.route('/gravar', methods=['POST','GET'])
 def gravar():
