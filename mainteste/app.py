@@ -31,6 +31,22 @@ def gravar():
     conn.commit()
   return render_template('cadastrar.html')
 
+@app.route('/alterar', methods=['PUT','GET'])
+def gravar():
+  ID = request.form['prod_id']
+  marca = request.form['marca']
+  nome = request.form['nome']
+  preco = request.form['preco']
+  quantidade = request.form['quantidade']
+  validade = request.form['validade']
+  categoria = request.form['categoria']
+  if marca and nome and preco and quantidade and validade and categoria:
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    cursor.execute('UPDATE tbl_produto SET prod_marca = %S, prod_nome = %S, prod_preco = %S, prod_qtd = %S, prod_validade = %S, prod_categoria = %S WHERE prod_id = %i', (marca, nome, preco, quantidade, validade, categoria, ID))
+    conn.commit()
+  return render_template('alterar.html')
+
 @app.route('/listar', methods=['POST','GET'])
 def listar():
   conn = mysql.connect()
