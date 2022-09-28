@@ -40,7 +40,7 @@ def gravar():
   quantidade = request.form['quantidade']
   validade = request.form['validade']
   categoria = request.form['categoria']
-  if marca and nome and preco and quantidade and validade and categoria:
+  if ID and marca and nome and preco and quantidade and validade and categoria:
     conn = mysql.connect()
     cursor = conn.cursor()
     cursor.execute('UPDATE tbl_produto SET prod_marca = %S, prod_nome = %S, prod_preco = %S, prod_qtd = %S, prod_validade = %S, prod_categoria = %S WHERE prod_id = %i', (marca, nome, preco, quantidade, validade, categoria, ID))
