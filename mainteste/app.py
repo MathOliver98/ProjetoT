@@ -32,7 +32,7 @@ def gravar():
   return render_template('cadastrar.html')
 
 @app.route('/alterar', methods=['PUT','GET'])
-def gravar():
+def alterar():
   ID = request.form['prod_id']
   marca = request.form['marca']
   nome = request.form['nome']
