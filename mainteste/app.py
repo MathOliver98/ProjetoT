@@ -51,7 +51,7 @@ def alterar():
 def listar():
   conn = mysql.connect()
   cursor = conn.cursor()
-  cursor.execute('select produto_nome, produto_preco, produto_categoria from tbl_produto')
+  cursor.execute('select prod_marca, prod_nome, prod_preco, prod_qtd, prod_validade, prod_categoria from tbl_produto')
   data = cursor.fetchall()
   conn.commit()
   return render_template('lista.html', datas=data)
