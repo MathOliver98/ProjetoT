@@ -14,7 +14,7 @@ mysql.init_app(app)
 
 @app.route('/')
 def main():
-    return render_template('gravar.html')
+    return render_template('cadastrar.html')
 
 @app.route('/gravar', methods=['POST','GET'])
 def gravar():
@@ -36,7 +36,7 @@ def gravar():
 
 @app.route('/alterar', methods=['POST','GET'])
 def alterar():
-  return render_template('alterarProd.html')
+  return render_template('alterar.html')
 
 @app.route('/listar', methods=['POST','GET'])
 def listar():
