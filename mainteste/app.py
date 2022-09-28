@@ -36,7 +36,7 @@ def gravar():
 
 @app.route('/alterar', methods=['POST','GET'])
 def alterar():
-  return render_template('alterar.html')
+  return render_template('alterarProd.html')
 
 @app.route('/listar', methods=['POST','GET'])
 def listar():
