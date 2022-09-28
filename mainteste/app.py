@@ -18,16 +18,18 @@ def main():
 
 @app.route('/gravar', methods=['POST','GET'])
 def gravar():
+  sqlQuery = """INSERT INTO tbl_produto (prod_marca, prod_nome, prod_preco, prod_qtd, prod_validade, prod_categoria) VALUES (%s, %s, %s, %s, %s, %s)"""
   marca = request.form['marca']
   nome = request.form['nome']
   preco = request.form['preco']
   quantidade = request.form['quantidade']
   validade = request.form['validade']
   categoria = request.form['categoria']
+  inputDados = (marca, nome, preco, quantidade, validade, categoria)
   if marca and nome and preco and quantidade and validade and categoria:
     conn = mysql.connect()
     cursor = conn.cursor()
-    cursor.execute('INSERT INTO tbl_produto (prod_marca, prod_nome, prod_preco, prod_qtd, prod_validade, prod_categoria) VALUES (%s, %s, %s, %s, %s, %s)', (marca, nome, preco, quantidade, validade, categoria))
+    cursor.execute(sqlQuery, inputDados)
     conn.commit()
   return render_template('cadastrar.html')
 
