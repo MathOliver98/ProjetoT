@@ -14,7 +14,7 @@ mysql.init_app(app)
 
 @app.route('/')
 def main():
-    return render_template('alterar.html')
+    return render_template('gravar.html')
 
 @app.route('/gravar', methods=['POST','GET'])
 def gravar():
@@ -36,20 +36,6 @@ def gravar():
 
 @app.route('/alterar', methods=['POST','GET'])
 def alterar():
-  sqlQuery = """UPDATE tbl_produto SET prod_marca = %s, prod_nome = %s, prod_preco = %s, prod_qtd = %s, prod_validade = %s, prod_categoria = %s WHERE prod_ID = %s"""
-  marca = request.form['marca']
-  nome = request.form['nome']
-  preco = request.form['preco']
-  quantidade = request.form['quantidade']
-  validade = request.form['validade']
-  categoria = request.form['categoria']
-  prodID = request.form['prodID']
-  inputDados = (marca, nome, preco, quantidade, validade, categoria, prodID)
-  if ProdID and marca and nome and preco and quantidade and validade and categoria:
-    conn = mysql.connect()
-    cursor = conn.cursor()
-    cursor.execute(sqlQuery, inputDados)
-    conn.commit()
   return render_template('alterar.html')
 
 @app.route('/listar', methods=['POST','GET'])
