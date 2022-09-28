@@ -33,7 +33,7 @@ def gravar():
 
 @app.route('/alterar', methods=['PUT','GET'])
 def gravar():
-  ID = request.form['ID']
+  ID = request.form['prod_id']
   marca = request.form['marca']
   nome = request.form['nome']
   preco = request.form['preco']
