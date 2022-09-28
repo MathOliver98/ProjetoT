@@ -18,14 +18,14 @@ def main():
 
 @app.route('/gravar', methods=['POST','GET'])
 def gravar():
-  sqlQuery = """INSERT INTO tbl_produto (prod_marca, prod_nome, prod_preco, prod_qtd, prod_validade, prod_categoria, prod_id) VALUES (%s, %s, %s, %s, %s, %s, %s)"""
+  sqlQuery = """INSERT INTO tbl_produto (prod_marca, prod_nome, prod_preco, prod_qtd, prod_validade, prod_categoria, prod_ID) VALUES (%s, %s, %s, %s, %s, %s, %s)"""
   marca = request.form['marca']
   nome = request.form['nome']
   preco = request.form['preco']
   quantidade = request.form['quantidade']
   validade = request.form['validade']
   categoria = request.form['categoria']
-  prodID = request.form['prod_id']
+  prodID = request.form['prod_ID']
   inputDados = (marca, nome, preco, quantidade, validade, categoria, prodID)
   if marca and nome and preco and quantidade and validade and categoria and prodID:
     conn = mysql.connect()
@@ -36,7 +36,7 @@ def gravar():
 
 @app.route('/alterar', methods=['PUT','GET'])
 def alterar():
-  sqlQuery = """UPDATE tbl_produto SET prod_marca = %s, prod_nome = %s, prod_preco = %s, prod_qtd = %s, prod_validade = %s, prod_categoria = %s WHERE prod_id = %s"""
+  sqlQuery = """UPDATE tbl_produto SET prod_marca = %s, prod_nome = %s, prod_preco = %s, prod_qtd = %s, prod_validade = %s, prod_categoria = %s WHERE prod_ID = %s"""
   marca = request.form['marca']
   nome = request.form['nome']
   preco = request.form['preco']
@@ -54,7 +54,7 @@ def alterar():
 
 @app.route('/listar', methods=['POST','GET'])
 def listar():
-  sqlQuery = """SELECT prod_marca, prod_nome, prod_preco, prod_qtd, prod_validade, prod_categoria, prod_id FROM tbl_produto"""
+  sqlQuery = """SELECT prod_marca, prod_nome, prod_preco, prod_qtd, prod_validade, prod_categoria, prod_ID FROM tbl_produto"""
   conn = mysql.connect()
   cursor = conn.cursor()
   cursor.execute(sqlQuery)
