@@ -18,15 +18,16 @@ def main():
 
 @app.route('/gravar', methods=['POST','GET'])
 def gravar():
-  sqlQuery = """INSERT INTO tbl_produto (prod_marca, prod_nome, prod_preco, prod_qtd, prod_validade, prod_categoria) VALUES (%s, %s, %s, %s, %s, %s)"""
+  sqlQuery = """INSERT INTO tbl_produto (prod_marca, prod_nome, prod_preco, prod_qtd, prod_validade, prod_categoria, prod_id) VALUES (%s, %s, %s, %s, %s, %s, %s)"""
   marca = request.form['marca']
   nome = request.form['nome']
   preco = request.form['preco']
   quantidade = request.form['quantidade']
   validade = request.form['validade']
   categoria = request.form['categoria']
-  inputDados = (marca, nome, preco, quantidade, validade, categoria)
-  if marca and nome and preco and quantidade and validade and categoria:
+  prodID = request.form['prod_id']
+  inputDados = (marca, nome, preco, quantidade, validade, categoria, prodID)
+  if marca and nome and preco and quantidade and validade and categoria and prodID:
     conn = mysql.connect()
     cursor = conn.cursor()
     cursor.execute(sqlQuery, inputDados)
@@ -45,15 +46,16 @@ def alterar():
   if ProdID and marca and nome and preco and quantidade and validade and categoria:
     conn = mysql.connect()
     cursor = conn.cursor()
-    cursor.execute('UPDATE tbl_produto SET prod_marca = %S, prod_nome = %S, prod_preco = %S, prod_qtd = %S, prod_validade = %S, prod_categoria = %S WHERE prod_id = %i', (marca, nome, preco, quantidade, validade, categoria, ProdID))
+    cursor.execute('UPDATE tbl_produto SET prod_marca = %s, prod_nome = %s, prod_preco = %s, prod_qtd = %s, prod_validade = %s, prod_categoria = %s WHERE prod_id = %s', (marca, nome, preco, quantidade, validade, categoria, ProdID))
     conn.commit()
   return render_template('alterar.html')
 
 @app.route('/listar', methods=['POST','GET'])
 def listar():
+  sqlQuery = """SELECT prod_marca, prod_nome, prod_preco, prod_qtd, prod_validade, prod_categoria, prod_id FROM tbl_produto"""
   conn = mysql.connect()
   cursor = conn.cursor()
-  cursor.execute('select prod_marca, prod_nome, prod_preco, prod_qtd, prod_validade, prod_categoria from tbl_produto')
+  cursor.execute(sqlQuery)
   data = cursor.fetchall()
   conn.commit()
   return render_template('lista.html', datas=data)
