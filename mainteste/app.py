@@ -37,7 +37,7 @@ def gravar():
     conn.close()
   return render_template('cadastrar.html')
 
-@app.route('/alterar', methods=['PUT'])
+@app.route('/alterar', methods=['PUT', 'GET'])
 def alterar():
   sqlQuery = """UPDATE tbl_produto SET prod_marca = %s, prod_nome = %s, prod_preco = %s, prod_qtd = %s, prod_validade = %s, prod_garantia = %s, prod_categoria = %s WHERE prod_ID = %s"""
   marca = request.form['marca']
