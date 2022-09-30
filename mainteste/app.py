@@ -57,18 +57,6 @@ def alterar():
     conn.close()
   return render_template('alterar.html')
 
-@app.route('/deletar', methods=['DELETE','GET'])
-def gravar():
-  sqlQuery = """DELETE FROM tbl_produto WHERE prod_ID = %s"""
-  prodID = request.form['prodID']
-  if prodID:
-    conn = mysql.connect()
-    cursor = conn.cursor()
-    cursor.execute(sqlQuery, prodID)
-    conn.commit()
-    cursor.close()
-    conn.close()
-  return render_template('deletar.html')
 
 @app.route('/listar', methods=['POST','GET'])
 def listar():
