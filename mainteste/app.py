@@ -37,7 +37,7 @@ def gravar():
     conn.close()
   return render_template('cadastrar.html')
 
-@app.route('/alterar', methods=['PUT','GET'])
+@app.route('/alterar', methods=['PUT'])
 def alterar():
   sqlQuery = """UPDATE tbl_produto SET prod_marca = %s, prod_nome = %s, prod_preco = %s, prod_qtd = %s, prod_validade = %s, prod_garantia = %s, prod_categoria = %s WHERE prod_ID = %s"""
   marca = request.form['marca']
@@ -57,6 +57,18 @@ def alterar():
     conn.close()
   return render_template('alterar.html')
 
+@app.route('/deletar', methods=['DELETE'])
+def gravar():
+  sqlQuery = """DELETE FROM tbl_produto WHERE prod_ID = %s"""
+  prodID = request.form['prodID']
+  if prodID:
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    cursor.execute(sqlQuery, prodID)
+    conn.commit()
+    cursor.close()
+    conn.close()
+  return render_template('deletar.html')
 
 @app.route('/listar', methods=['POST','GET'])
 def listar():
