@@ -18,7 +18,7 @@ def main():
 
 @app.route('/gravar', methods=['POST','GET'])
 def gravar():
-  sqlQuery = """INSERT INTO tbl_produto (prod_marca, prod_nome, prod_preco, prod_qtd, prod_validade, prod_categoria, prod_ID) VALUES (%s, %s, %s, %s, %s, %s, %s)"""
+  sqlQuery = """INSERT INTO tbl_produto (prod_marca, prod_nome, prod_preco, prod_qtd, prod_validade, prod_garantia, prod_categoria, prod_ID) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"""
   marca = request.form['marca']
   nome = request.form['nome']
   preco = request.form['preco']
@@ -38,7 +38,7 @@ def gravar():
 
 @app.route('/alterar', methods=['PUT','GET'])
 def alterar():
-  sqlQuery = """UPDATE tbl_produto SET prod_marca = %s, prod_nome = %s, prod_preco = %s, prod_qtd = %s, prod_validade = %s, prod_categoria = %s WHERE prod_ID = %s"""
+  sqlQuery = """UPDATE tbl_produto SET prod_marca = %s, prod_nome = %s, prod_preco = %s, prod_qtd = %s, prod_validade = %s, prod_garantia = %s, prod_categoria = %s WHERE prod_ID = %s"""
   marca = request.form['marca']
   nome = request.form['nome']
   preco = request.form['preco']
@@ -56,9 +56,22 @@ def alterar():
     conn.close()
   return render_template('alterar.html')
 
+@app.route('/deletar', methods=['DELETE','GET'])
+def gravar():
+  sqlQuery = """DELETE FROM tbl_produto WHERE prod_ID = %s"""
+  prodID = request.form['prodID']
+  if prodID:
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    cursor.execute(sqlQuery, prodID)
+    conn.commit()
+    cursor.close()
+    conn.close()
+  return render_template('deletar.html')
+
 @app.route('/listar', methods=['POST','GET'])
 def listar():
-  sqlQuery = """SELECT prod_marca, prod_nome, prod_preco, prod_qtd, prod_validade, prod_categoria, prod_ID FROM tbl_produto"""
+  sqlQuery = """SELECT prod_marca, prod_nome, prod_preco, prod_qtd, prod_validade, prod_garantia,prod_categoria, prod_ID FROM tbl_produto"""
   conn = mysql.connect()
   cursor = conn.cursor()
   cursor.execute(sqlQuery)
