@@ -27,7 +27,7 @@ def gravar():
   garantia = request.form['garantia']
   categoria = request.form['categoria']
   prodID = request.form['prodID']
-  inputDados = (marca, nome, preco, quantidade, validade, categoria, prodID)
+  inputDados = (marca, nome, preco, quantidade, validade, garantia, categoria, prodID)
   if marca and nome and preco and quantidade and validade and garantia and categoria and prodID:
     conn = mysql.connect()
     cursor = conn.cursor()
@@ -60,7 +60,7 @@ def alterar():
 
 @app.route('/listar', methods=['POST','GET'])
 def listar():
-  sqlQuery = """SELECT prod_marca, prod_nome, prod_preco, prod_qtd, prod_validade, prod_garantia,prod_categoria, prod_ID FROM tbl_produto"""
+  sqlQuery = """SELECT prod_marca, prod_nome, prod_preco, prod_qtd, prod_validade, prod_garantia, prod_categoria, prod_ID FROM tbl_produto"""
   conn = mysql.connect()
   cursor = conn.cursor()
   cursor.execute(sqlQuery)
