@@ -45,10 +45,11 @@ def alterar():
   preco = request.form['preco']
   quantidade = request.form['quantidade']
   validade = request.form['validade']
+  garantia = request.form['garantia']
   categoria = request.form['categoria']
   prodID = request.form['prodID']
-  inputDados = (marca, nome, preco, quantidade, validade, categoria, prodID)
-  if ProdID and marca and nome and preco and quantidade and validade and categoria:
+  inputDados = (marca, nome, preco, quantidade, validade, garantia, categoria, prodID)
+  if marca and nome and preco and quantidade and validade and garantia and categoria and prodID:
     conn = mysql.connect()
     cursor = conn.cursor()
     cursor.execute(sqlQuery, inputDados)
